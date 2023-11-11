@@ -1,0 +1,83 @@
+import java.util.Scanner;
+
+public class OnlineExamSystem {
+    private static String username;
+    private static String password;
+    private static boolean isLoggedIn = false;
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        while (true) {
+            if (!isLoggedIn) {
+                System.out.println("Welcome to the Online Exam System");
+                System.out.print("Enter username: ");
+                String inputUsername = scanner.nextLine();
+                System.out.print("Enter password: ");
+                String inputPassword = scanner.nextLine();
+
+                if (login(inputUsername, inputPassword)) {
+                    System.out.println("Login successful. Welcome, " + username + "!");
+                    isLoggedIn = true;
+                } else {
+                    System.out.println("Login failed. Invalid username or password.");
+                }
+            } else {
+                System.out.println("1. Update Profile and Password");
+                System.out.println("2. Select Answers for MCQs");
+                System.out.println("3. Start Timer and Auto Submit");
+                System.out.println("4. Close Session and Logout");
+                System.out.print("Enter your choice: ");
+                int choice = scanner.nextInt();
+                scanner.nextLine(); 
+
+                switch (choice) {
+                    case 1:
+                        updateProfile();
+                        break;
+                    case 2:
+                        selectMCQAnswers();
+                        break;
+                    case 3:
+                        startTimer();
+                        break;
+                    case 4:
+                        closeSession();
+                        isLoggedIn = false;
+                        break;
+                    default:
+                        System.out.println("Invalid choice. Please try again.");
+                }
+            }
+        }
+    }
+
+    private static boolean login(String inputUsername, String inputPassword) {
+        if (inputUsername.equals("user") && inputPassword.equals("pass")) {
+            username = inputUsername;
+            password = inputPassword;
+            return true;
+        }
+        return false;
+    }
+
+    private static void updateProfile() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter new password: ");
+        String newPassword = scanner.nextLine();
+        password = newPassword;
+        System.out.println("Profile updated successfully.");
+    }
+
+    private static void selectMCQAnswers() {
+        System.out.println("Selecting answers for MCQs...");
+    }
+
+    private static void startTimer() {
+        System.out.println("Timer started. Auto-submitting after a set time...");
+    }
+
+    private static void closeSession() {
+        System.out.println("Closing session and logging out. Goodbye!");
+    }
+}
